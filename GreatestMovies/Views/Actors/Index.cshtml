@@ -2,50 +2,46 @@
 
 @{
     ViewBag.Title = "Index";
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Source+Sans+Pro|Titillium+Web" rel="stylesheet">
 }
+<center>
+    <h2>Famous Actors</h2>
 
-<h2>Index</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+</center>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ActorName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DOB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nationality)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4 colBorder">
+                <div class="card">
+                    <img class="card-img-top">
+                    <div class="card-block">
+                        <h4 class="card-title">@Html.DisplayFor(modelItem => item.ActorName)</h4>
+                        <div class="card-text">
+                            DOB: @item.DOB.ToShortDateString()
+                        </div>
+                        <div class="card-text">
+                            Nationality: @Html.DisplayFor(modelItem => item.Nationality)
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="float-right">Gender: @Html.DisplayFor(modelItem => item.Gender)</span>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DOB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nationality)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ActorID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ActorID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ActorID })
-        </td>
-    </tr>
-}
+                    </div>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ActorID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ActorID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ActorID })
+                    </p>
+                </div>
+            </div>
 
-</table>
+
+        }
+    </div>
+
+</div>
